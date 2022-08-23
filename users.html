@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script async defer src="js/bootstrap.min.js"></script>
+    <script src="jquery/jquery.min.js"></script>
+    <meta name='viewport' content='width = device-width, initial-scale = 1'>
+    <meta charset='utf-8'>
+    <title>Users Array task</title>
+</head>
+<script>
+    function updateInfo(userId, userName, userNum, update) {
+        if (update === 1) {
+            document.getElementById("id").value = userId;
+            document.getElementById("id").ReadOnly = true;
+            document.getElementById("id").setAttribute("readonly", true);
+            document.getElementById("name").value = userName;
+            document.getElementById("number").value = userNum;
+            document.getElementById("addval").value = "Update";
+            document.getElementById("upd").value = 1;
+        }
+    }
+
+    $(document).ready(function () {
+        
+        $("#update").click(function () {
+            $('#id').prop('readonly', true);
+        });
+    });
+</script>
+<body>
+    <div class="row mt-5 d-flex justify-content-center">
+        <h5 class="h5 bg-dark p-3 text-white text-center">Add and Update User into Array list</h5>
+        <div class="col-4">
+            <form method="post">
+                <div class="form-group">
+                    <label for="id">User Id</label>
+                    <input type="text" class="form-control" id="id" aria-describedby="User ID" placeholder="User ID" name="id">
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="number">Number</label>
+                    <input type="number" class="form-control" id="number" placeholder="Number" name="number">
+                </div>
+                <div class="d-flex justify-content-center mt-3"><input type="submit" class="btn btn-primary" value="Add" id="addval" /></div>
+                <input type="hidden" name="upd" id="upd" />
+            </form>
+        </div>
+        <div class="col-6 table-responsive mt-3">
+            <table class="table table-sm table-hover">
+                <tr><th>ID</th><th>Name</th><th>Number</th><th>Update</th></tr>
+                <% if(dataa.length>0){ %>
+
+                <% dataa.forEach(function(users){ %>
+
+                <tr>
+                    <td>
+                        <%= users.id %>
+                    </td>
+                    <td>
+                        <%= users.name %>
+                    </td>
+                    <td>
+                        <%= users.number %>
+                    </td>
+                    <td><input class="btn btn-sm btn-outline-secondary" value="Update Info" type="button" id="update" onclick="updateInfo('<%= users.id %>' , '<%= users.name %>' , '<%= users.number %>' , 1 )" ></td>
+                </tr>
+
+                <% }); %>
+
+                <% } %>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
